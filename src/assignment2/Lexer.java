@@ -5,10 +5,7 @@ import assignment2.Token.TokenCode;
 public class Lexer {
 
 	public static TokenCode nextToken(String input){
-		
-		System.out.println(input);
-		
-		
+	
 		if(input.equals("{")){
 			return TokenCode.LPAREN;
 		}
