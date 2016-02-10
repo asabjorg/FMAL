@@ -8,27 +8,30 @@ import assignment2.Lexer;
 
 public class Parser {
 	
-	//útfæra stack
-	Stack<TokenCode> stack = new Stack();
-	
-	
-	Scanner sc = new Scanner(System.in);
-	
-	String input = sc.next();
-	
+	Token tokens;
+	Lexer lexer; 
+	Stack<TokenCode> stack;
 	TokenCode nextToken; 
 	
+	public Parser(Lexer myLexer) {
+		this.lexer = myLexer;
+		this.stack = new Stack<TokenCode>();
+	}
+
 	public void parse(){
 		
 		nextToken = Lexer.nextToken();
 		Statements();
 	}
-	//fyrsti Non-terminal 
+	
 	private void Statements() {
 		
 		Statement();
 		nextToken = Lexer.nextToken();
 		if(nextToken == TokenCode.SEMICOL){
+			//fall sem prentar 
+			//prenta það sem við á, 
+			//láta interpreter taka við stdin frá parser
 			stack.push(nextToken);
 			nextToken = Lexer.nextToken();
 		}
@@ -46,7 +49,19 @@ public class Parser {
 	
 	private void Statement(){
 		
-		
+		if(nextToken == TokenCode.ID){
+			nextToken = Lexer.nextToken();
+			if(nextToken == TokenCode.ASSIGN){
+				nextToken = Lexer.nextToken();
+				Expr();
+			}
+			else{
+				Error();
+			}
+		}
+		else{
+			Error();
+		}
 	}
 	
 	private void Error(){
@@ -56,7 +71,28 @@ public class Parser {
 		
 	}
 
-
+	private void Expr(){
+		
+		
+		
+	}
+	
+	private void Term(){
+		
+		
+		
+	}
+	
+	private void Factor(){
+		
+		
+		
+	}
+	
+	private void Print(){
+		
+		//þegar ég fæ semikommu að prenta út það sem er á staknum m.v. það sem kemur af staknum. 
+	}
 	
 	
 	
