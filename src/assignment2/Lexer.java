@@ -1,10 +1,16 @@
 package assignment2;
 
+import java.util.Scanner;
+
 import assignment2.Token.TokenCode;
 
 public class Lexer {
 
-	public static TokenCode nextToken(String input){
+	public static TokenCode nextToken(){
+		
+		Scanner sc = new Scanner(System.in);
+		
+		String input = sc.next();
 	
 		if(input.equals("{")){
 			return TokenCode.LPAREN;
