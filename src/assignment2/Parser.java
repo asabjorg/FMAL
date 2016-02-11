@@ -25,23 +25,17 @@ public class Parser {
 		Statement();
 		nextToken = Lexer.nextToken();
 		if(nextToken.tCode == Token.TokenCode.SEMICOL){
-			
 			nextToken = Lexer.nextToken();
+			Statements();
+		}
+		else if(nextToken.tCode.equals(Token.TokenCode.END)){
+			
+			return;
 		}
 		else{
+			System.out.println("This error: 1");
 			Error();
-		}
-		
-		Statements();
-		
-		if(nextToken.tCode.equals(Token.TokenCode.END)){
 			
-			if(Lexer.nextToken() != null){
-				Error();
-			}
-			else{
-				return;
-			}
 		}
 	}
 	
