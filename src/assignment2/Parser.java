@@ -1,6 +1,5 @@
-package assignment2;
+/*package assignment2;
 
-import java.util.Scanner;
 import java.util.Stack;
 
 import assignment2.Token.TokenCode;
@@ -11,7 +10,7 @@ public class Parser {
 	Token tokens;
 	Lexer lexer; 
 	Stack<TokenCode> stack;
-	TokenCode nextToken; 
+	Token nextToken; 
 	
 	public Parser(Lexer myLexer) {
 		this.lexer = myLexer;
@@ -23,16 +22,13 @@ public class Parser {
 		nextToken = Lexer.nextToken();
 		Statements();
 	}
-	
+	/*
 	private void Statements() {
 		
 		Statement();
 		nextToken = Lexer.nextToken();
 		if(nextToken == TokenCode.SEMICOL){
-			//fall sem prentar 
-			//prenta það sem við á, 
-			//láta interpreter taka við stdin frá parser
-			stack.push(nextToken);
+			
 			nextToken = Lexer.nextToken();
 		}
 		else{
@@ -42,7 +38,7 @@ public class Parser {
 		Statements();
 		
 		if(nextToken.equals(TokenCode.END)){
-			stack.push(nextToken);
+			
 			nextToken = Lexer.nextToken();
 		}
 	}
@@ -52,6 +48,7 @@ public class Parser {
 		if(nextToken == TokenCode.ID){
 			nextToken = Lexer.nextToken();
 			if(nextToken == TokenCode.ASSIGN){
+				
 				nextToken = Lexer.nextToken();
 				Expr();
 			}
@@ -63,36 +60,62 @@ public class Parser {
 			Error();
 		}
 	}
+
+	private void Expr(){
+		
+		Term();
+		nextToken = Lexer.nextToken();
+		if(nextToken == TokenCode.ADD){
+			nextToken = Lexer.nextToken();
+			Expr();
+		}
+		
+		else if(nextToken == TokenCode.SUB){
+			nextToken = Lexer.nextToken();
+			Expr();
+		}
+	}
+	
+	private void Term(){
+	
+		Factor();
+		if(nextToken == TokenCode.MULT){
+			nextToken = Lexer.nextToken();
+			Term();
+		}
+	}
+	
+	private void Factor(){
+		if(nextToken == TokenCode.INT){
+			nextToken = Lexer.nextToken();
+		}
+		else if(nextToken == TokenCode.ID){
+			nextToken = Lexer.nextToken();
+		}
+		else  if(nextToken == TokenCode.LPAREN){
+			Expr();
+			if(nextToken == TokenCode.RPAREN){
+			nextToken = Lexer.nextToken();
+			}
+			else{
+				Error();
+			}
+		}
+		
+		
+	}
+	
+	private void Print(TokenCode token){
+		
+		//þegar ég fæ semikommu að prenta út það sem er á staknum m.v. það sem kemur af staknum. 
+	}
 	
 	private void Error(){
 		
 		System.out.println("Syntax Error!");
 		return; 
 		
-	}
-
-	private void Expr(){
-		
-		
-		
-	}
-	
-	private void Term(){
-		
-		
-		
-	}
-	
-	private void Factor(){
-		
-		
-		
-	}
-	
-	private void Print(){
-		
-		//þegar ég fæ semikommu að prenta út það sem er á staknum m.v. það sem kemur af staknum. 
-	}
+	}*/
 	
 	
 	
