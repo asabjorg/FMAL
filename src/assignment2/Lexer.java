@@ -113,6 +113,15 @@ public class Lexer {
 			}
 			
 		}
+		else if(Character.isDigit(lexeme.charAt(0))){
+			
+		int lenght = lexeme.length(); 
+			
+			while(isInt(lexeme) && lenght > index+1){ö
+				index++;
+				lexeme += input[index];
+			}
+		}
 		
 		token.lexeme = "";
 		token.tCode = TokenCode.ERROR;
