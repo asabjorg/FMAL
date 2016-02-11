@@ -91,17 +91,16 @@ public class Lexer {
 			while(Character.isAlphabetic(input[index + 1]) && index + 1 < input.length ){
 				index++;
 				lexeme = lexeme + input[index];
-				System.out.println(lexeme);
 			}
 			
 			//athuga frátekin orð
 			if(lexeme.equals("print")){
-				token.tCode  = TokenCode.PRINT;
+				token.tCode  = Token.TokenCode.PRINT;
 				token.lexeme = lexeme;
 				return token; 
 			}
 			else if(lexeme.equals("end")){
-				token.tCode  = TokenCode.END;
+				token.tCode  = Token.TokenCode.END;
 				token.lexeme = lexeme;
 				return token; 
 			}
@@ -111,6 +110,7 @@ public class Lexer {
 				token.lexeme = lexeme;
 				return token; 
 			}
+			
 		}
 		else if(Character.isDigit(lexeme.charAt(0))){
 			
@@ -118,6 +118,8 @@ public class Lexer {
 				index++;
 				lexeme += input[index];
 			}
+			token.lexeme = lexeme; 
+			token.tCode = Token.TokenCode.INT;
 		}
 		else{
 			token.lexeme = "";
