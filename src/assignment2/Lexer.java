@@ -32,15 +32,11 @@ public class Lexer {
 		
 		Token token = new Token(); 
 		
-		
 		while(input[index] == ' '){
 			index++;
 		}
 
-		token.lexeme = findLex().lexeme;
-		System.out.println(token.lexeme);
-		token.tCode = findLex().tCode; 
-		System.out.println(token.tCode);
+		token = findLex();
 		index++;
 		
 		return token;		
@@ -91,13 +87,13 @@ public class Lexer {
 		}
 		
 		else if(Character.isAlphabetic(lexeme.charAt(0))){
-
-			int length = lexeme.length();
-			
-			while(isAlpha(lexeme) && length > index+1){
+		
+			while(Character.isAlphabetic(input[index + 1]) && index + 1 < input.length ){
 				index++;
-				lexeme += input[index];
+				lexeme = lexeme + input[index];
+				System.out.println(lexeme);
 			}
+			
 			//athuga frátekin orð
 			if(lexeme.equals("print")){
 				token.tCode  = TokenCode.PRINT;
@@ -115,22 +111,17 @@ public class Lexer {
 				token.lexeme = lexeme;
 				return token; 
 			}
-			
 		}
 		else if(Character.isDigit(lexeme.charAt(0))){
 			
-		int lenght = lexeme.length(); 
-			
-			while(isInt(lexeme) && lenght > index+1){
+			while(Character.isDigit(input[index + 1]) && input.length > index+1){
 				index++;
 				lexeme += input[index];
-				
 			}
 		}
 		else{
 			token.lexeme = "";
 			token.tCode = TokenCode.ERROR;
-			index++;
 		}
 	
 		return token; 
@@ -140,6 +131,7 @@ public class Lexer {
 	public static boolean isAlpha(String string) {
 	    return string.matches("[a-zA-Z]+");
 	}
+	
 	public static boolean isInt(String string) {
 	    return string.matches("[0-9]+");
 	}

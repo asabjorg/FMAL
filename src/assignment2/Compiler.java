@@ -1,10 +1,8 @@
 package assignment2;
 
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 import assignment2.Lexer;
-import assignment2.Token.TokenCode;
 
 public class Compiler {
 	

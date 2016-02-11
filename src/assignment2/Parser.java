@@ -2,19 +2,16 @@ package assignment2;
 
 import java.util.Stack;
 
-import assignment2.Token.TokenCode;
-import assignment2.Lexer; 
-
 public class Parser {
 	
 	Token tokens;
 	Lexer lexer; 
-	Stack<TokenCode> stack;
+	Stack<Token.TokenCode> stack;
 	Token nextToken; 
 	
 	public Parser(Lexer myLexer) {
 		this.lexer = myLexer;
-		this.stack = new Stack<TokenCode>();
+		this.stack = new Stack<Token.TokenCode>();
 	}
 
 	public void parse(){
@@ -27,7 +24,7 @@ public class Parser {
 		
 		Statement();
 		nextToken = Lexer.nextToken();
-		if(nextToken.tCode == TokenCode.SEMICOL){
+		if(nextToken.tCode == Token.TokenCode.SEMICOL){
 			
 			nextToken = Lexer.nextToken();
 		}
@@ -37,17 +34,22 @@ public class Parser {
 		
 		Statements();
 		
-		if(nextToken.tCode.equals(TokenCode.END)){
+		if(nextToken.tCode.equals(Token.TokenCode.END)){
 			
-			nextToken = Lexer.nextToken();
+			if(Lexer.nextToken() != null){
+				Error();
+			}
+			else{
+				return;
+			}
 		}
 	}
 	
 	private void Statement(){
 		
-		if(nextToken.tCode == TokenCode.ID){
+		if(nextToken.tCode == Token.TokenCode.ID){
 			nextToken = Lexer.nextToken();
-			if(nextToken.tCode == TokenCode.ASSIGN){
+			if(nextToken.tCode == Token.TokenCode.ASSIGN){
 				
 				nextToken = Lexer.nextToken();
 				Expr();
@@ -65,12 +67,12 @@ public class Parser {
 		
 		Term();
 		nextToken = Lexer.nextToken();
-		if(nextToken.tCode == TokenCode.ADD){
+		if(nextToken.tCode == Token.TokenCode.ADD){
 			nextToken = Lexer.nextToken();
 			Expr();
 		}
 		
-		else if(nextToken.tCode == TokenCode.SUB){
+		else if(nextToken.tCode == Token.TokenCode.SUB){
 			nextToken = Lexer.nextToken();
 			Expr();
 		}
@@ -79,22 +81,22 @@ public class Parser {
 	private void Term(){
 	
 		Factor();
-		if(nextToken.tCode == TokenCode.MULT){
+		if(nextToken.tCode == Token.TokenCode.MULT){
 			nextToken = Lexer.nextToken();
 			Term();
 		}
 	}
 	
 	private void Factor(){
-		if(nextToken.tCode == TokenCode.INT){
+		if(nextToken.tCode == Token.TokenCode.INT){
 			nextToken = Lexer.nextToken();
 		}
-		else if(nextToken.tCode == TokenCode.ID){
+		else if(nextToken.tCode == Token.TokenCode.ID){
 			nextToken = Lexer.nextToken();
 		}
-		else  if(nextToken.tCode == TokenCode.LPAREN){
+		else  if(nextToken.tCode == Token.TokenCode.LPAREN){
 			Expr();
-			if(nextToken.tCode == TokenCode.RPAREN){
+			if(nextToken.tCode == Token.TokenCode.RPAREN){
 			nextToken = Lexer.nextToken();
 			}
 			else{
@@ -102,10 +104,9 @@ public class Parser {
 			}
 		}
 		
-		
 	}
 	
-	private void Print(TokenCode token){
+	private void Print(Token.TokenCode token){
 		
 		//þegar ég fæ semikommu að prenta út það sem er á staknum m.v. það sem kemur af staknum. 
 	}
