@@ -1,5 +1,7 @@
 package assignment2;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -13,30 +15,32 @@ public class Lexer {
 	static Token token; 
 
 	
-	public Lexer(){
-		
+	public Lexer() throws FileNotFoundException{
+	
 		index = 0; 
-		sc = new Scanner(System.in);
 		String nextInput = "";
-		
+		sc = new Scanner(new File ("C:\\input.txt"));
+	
 		
 		while(sc.hasNextLine()){
 			nextInput += sc.nextLine();
 		}
-		
 		input = nextInput.toCharArray();
 	}
 	
 	public static Token nextToken() {
 		
-		//Token token = new Token(); 
+		Token token = new Token(); 
+		
 		
 		while(input[index] == ' '){
 			index++;
 		}
-		
+
 		token.lexeme = findLex().lexeme;
+		System.out.println(token.lexeme);
 		token.tCode = findLex().tCode; 
+		System.out.println(token.tCode);
 		index++;
 		
 		return token;		
@@ -117,16 +121,18 @@ public class Lexer {
 			
 		int lenght = lexeme.length(); 
 			
-			while(isInt(lexeme) && lenght > index+1){ö
+			while(isInt(lexeme) && lenght > index+1){
 				index++;
 				lexeme += input[index];
+				
 			}
 		}
-		
-		token.lexeme = "";
-		token.tCode = TokenCode.ERROR;
-		index++;
-		
+		else{
+			token.lexeme = "";
+			token.tCode = TokenCode.ERROR;
+			index++;
+		}
+	
 		return token; 
 	}
 
