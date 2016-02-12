@@ -15,7 +15,7 @@ public class Lexer {
 	static Token token; 
 
 	
-	public Lexer() throws FileNotFoundException{
+	public Lexer(){//throws FileNotFoundException{
 	
 		index = 0; 
 		String nextInput = "";
@@ -45,10 +45,7 @@ public class Lexer {
 	
 	private static Token findLex(){
 		
-		//Búum til token til að skila
 		Token token = new Token(); 
-		
-		//buum til streng til að matcha
 		String lexeme = "" + input[index];
 		
 		if(lexeme.equals("(")){
@@ -93,8 +90,7 @@ public class Lexer {
 				index++;
 				lexeme = lexeme + input[index];
 			}
-			
-			//athuga frátekin orð
+	
 			if(lexeme.equals("print")){
 				token.tCode  = Token.TokenCode.PRINT;
 				token.lexeme = lexeme;
@@ -105,7 +101,6 @@ public class Lexer {
 				token.lexeme = lexeme;
 				return token; 
 			}
-			//annars ID eða nafn á breytu
 			else {
 				token.tCode  = TokenCode.ID;
 				token.lexeme = lexeme;
@@ -130,15 +125,5 @@ public class Lexer {
 		
 		return token; 
 	}
-
-	
-	public static boolean isAlpha(String string) {
-	    return string.matches("[a-zA-Z]+");
-	}
-	
-	public static boolean isInt(String string) {
-	    return string.matches("[0-9]+");
-	}
-
 
 }
