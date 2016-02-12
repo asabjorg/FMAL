@@ -21,12 +21,11 @@ public class Parser {
 	}
 	
 	private void Statements() {
-		System.out.println("Statements");
 		
 		if(nextToken.tCode.equals(Token.TokenCode.END)){
+			System.out.println("No error");
 			return; 
 		}
-	
 		else{
 			Statement();
 			if(nextToken.tCode == Token.TokenCode.SEMICOL){
@@ -34,18 +33,14 @@ public class Parser {
 				Statements();
 			}
 			else{
-				System.out.println(nextToken.lexeme);
-				System.out.println("This error: 1");
-				Error();
+				Error();		
 			}
-		}
-					
+		}			
 	}
 
 	
 	private void Statement(){
 		
-		System.out.println("Statement");
 		if(nextToken.tCode == Token.TokenCode.ID){
 			nextToken = Lexer.nextToken();
 			if(nextToken.tCode == Token.TokenCode.ASSIGN){
@@ -68,7 +63,6 @@ public class Parser {
 	}
 
 	private void Expr(){
-		System.out.println("EXPR");
 		Term();
 		if(nextToken.tCode == Token.TokenCode.ADD){
 			nextToken = Lexer.nextToken();
@@ -82,7 +76,6 @@ public class Parser {
 	}
 	
 	private void Term(){
-		System.out.println("TERM");
 		Factor();
 		if(nextToken.tCode == Token.TokenCode.MULT){
 			nextToken = Lexer.nextToken();
@@ -91,7 +84,7 @@ public class Parser {
 	}
 	
 	private void Factor(){
-		System.out.println("Factor");
+		
 		if(nextToken.tCode == Token.TokenCode.INT){
 			nextToken = Lexer.nextToken();
 		}

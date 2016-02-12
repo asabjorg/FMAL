@@ -86,9 +86,9 @@ public class Lexer {
 			return token;
 		}
 		
-		else if(Character.isLetter(lexeme.charAt(0))){
+		else if(Character.isAlphabetic(lexeme.charAt(0))){
 		
-			while(Character.isLetter(input[index + 1]) && index + 1 < input.length ){
+			while((index + 1) < input.length && Character.isAlphabetic(input[index + 1]) ){
 				index++;
 				lexeme = lexeme + input[index];
 			}
@@ -126,6 +126,7 @@ public class Lexer {
 			token.tCode = TokenCode.ERROR;
 		}
 	
+		
 		return token; 
 	}
 
