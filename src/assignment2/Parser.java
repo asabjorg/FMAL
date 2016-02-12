@@ -6,16 +6,15 @@ public class Parser {
 	
 	Token tokens;
 	Lexer lexer; 
-	Stack<Token.TokenCode> stack;
+	Stack<String> stack;
 	Token nextToken; 
 	
 	public Parser(Lexer myLexer) {
 		this.lexer = myLexer;
-		this.stack = new Stack<Token.TokenCode>();
+		this.stack = new Stack<String>();
 	}
 
 	public void parse(){
-		
 		nextToken = Lexer.nextToken();
 		Statements();
 	}
@@ -23,12 +22,12 @@ public class Parser {
 	private void Statements() {
 		
 		if(nextToken.tCode.equals(Token.TokenCode.END)){
-			System.out.println("No error");
 			return; 
 		}
 		else{
 			Statement();
 			if(nextToken.tCode == Token.TokenCode.SEMICOL){
+				//poppa öllu af og skrifa út?? forlúppa
 				nextToken = Lexer.nextToken();
 				Statements();
 			}
@@ -37,7 +36,6 @@ public class Parser {
 			}
 		}			
 	}
-
 	
 	private void Statement(){
 		
@@ -65,11 +63,13 @@ public class Parser {
 	private void Expr(){
 		Term();
 		if(nextToken.tCode == Token.TokenCode.ADD){
+			stack.push("ADD");
 			nextToken = Lexer.nextToken();
 			Expr();
 		}
 		
 		else if(nextToken.tCode == Token.TokenCode.SUB){
+			stack.push("SUB");
 			nextToken = Lexer.nextToken();
 			Expr();
 		}
@@ -78,6 +78,7 @@ public class Parser {
 	private void Term(){
 		Factor();
 		if(nextToken.tCode == Token.TokenCode.MULT){
+			stack.push("MULT");
 			nextToken = Lexer.nextToken();
 			Term();
 		}
@@ -86,6 +87,7 @@ public class Parser {
 	private void Factor(){
 		
 		if(nextToken.tCode == Token.TokenCode.INT){
+			System.out.println("PUSH " + nextToken.lexeme);
 			nextToken = Lexer.nextToken();
 		}
 		else if(nextToken.tCode == Token.TokenCode.ID){
