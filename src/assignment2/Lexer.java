@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-import assignment2.Token.TokenCode;
+//import assignment2.Token.TokenCode;
 
 public class Lexer {
 	
@@ -49,37 +49,37 @@ public class Lexer {
 		String lexeme = "" + input[index];
 		
 		if(lexeme.equals("(")){
-			token.tCode  = TokenCode.LPAREN;
+			token.tCode  = Token.TokenCode.LPAREN;
 			token.lexeme = lexeme; 
 			return token; 
 		}
 		else if(lexeme.equals(")")){
-			token.tCode  = TokenCode.RPAREN;
+			token.tCode  = Token.TokenCode.RPAREN;
 			token.lexeme = lexeme; 
 			return token; 
 		}
 		else if(lexeme.equals("+")){
-			token.tCode  = TokenCode.ADD;
+			token.tCode  = Token.TokenCode.ADD;
 			token.lexeme = lexeme; 
 			return token;
 		}
 		else if(lexeme.equals("=")){
-			token.tCode  = TokenCode.ASSIGN;
+			token.tCode  = Token.TokenCode.ASSIGN;
 			token.lexeme = lexeme; 
 			return token;
 		}
 		else if(lexeme.equals("*")){
-			token.tCode  = TokenCode.MULT;
+			token.tCode  = Token.TokenCode.MULT;
 			token.lexeme = lexeme; 
 			return token;
 		}
 		else if(lexeme.equals(";")){
-			token.tCode  = TokenCode.SEMICOL;
+			token.tCode  = Token.TokenCode.SEMICOL;
 			token.lexeme = lexeme; 
 			return token;
 		}
 		else if(lexeme.equals("-")){
-			token.tCode  = TokenCode.SUB;
+			token.tCode  = Token.TokenCode.SUB;
 			token.lexeme = lexeme; 
 			return token;
 		}
@@ -102,7 +102,7 @@ public class Lexer {
 				return token; 
 			}
 			else {
-				token.tCode  = TokenCode.ID;
+				token.tCode  = Token.TokenCode.ID;
 				token.lexeme = lexeme;
 				return token; 
 			}
@@ -119,7 +119,7 @@ public class Lexer {
 		}
 		else{
 			token.lexeme = "";
-			token.tCode = TokenCode.ERROR;
+			token.tCode = Token.TokenCode.ERROR;
 		}
 	
 		
