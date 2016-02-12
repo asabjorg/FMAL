@@ -2,8 +2,6 @@ package assignment2;
 
 import java.io.FileNotFoundException;
 
-import assignment2.Lexer;
-
 public class Compiler {
 	
 	

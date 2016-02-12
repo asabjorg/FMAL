@@ -15,12 +15,12 @@ public class Lexer {
 	static Token token; 
 
 	
-	public Lexer(){//throws FileNotFoundException{
+	public Lexer()throws FileNotFoundException{
 	
 		index = 0; 
 		String nextInput = "";
-		sc = new Scanner(System.in);
-		//sc = new Scanner(new File ("C:\\input.txt"));
+		//sc = new Scanner(System.in);
+		sc = new Scanner(new File ("C:\\input.txt"));
 	
 		
 		while(sc.hasNextLine()){

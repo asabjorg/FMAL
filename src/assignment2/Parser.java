@@ -58,6 +58,9 @@ public class Parser {
 				System.out.println("PUSH " + nextToken.lexeme);
 				nextToken = Lexer.nextToken();
 			}
+			else{
+				Error();
+			}
 		}
 		else{
 			Error();
@@ -67,12 +70,22 @@ public class Parser {
 	private void Expr(){
 		Term();
 		if(nextToken.tCode == Token.TokenCode.ADD){
-			stack.push("ADD");
+			
 			nextToken = Lexer.nextToken();
+			if(stack.peek() == "MULT"){
+				String pop = stack.pop();
+				System.out.println(pop);
+			}
+			stack.push("ADD");
 			Expr();
 		}
 		
 		else if(nextToken.tCode == Token.TokenCode.SUB){
+			if(stack.peek() == "MULT"){
+				String pop = stack.pop();
+				System.out.println(pop);
+			}
+		
 			stack.push("SUB");
 			nextToken = Lexer.nextToken();
 			Expr();
@@ -115,6 +128,9 @@ public class Parser {
 			else{
 				Error();
 			}
+		}
+		else{
+			Error();
 		}
 		
 	}
