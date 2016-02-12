@@ -1,11 +1,10 @@
 package assignment2;
 import java.util.Stack;
 import java.util.Scanner;
-//import java.io.*;
 import java.util.*;
 
 
-public class InterpreterTest {
+public class Interpreter {
 
 	public static void main(String args[]){
 		Stack<String> st = new Stack<>();
