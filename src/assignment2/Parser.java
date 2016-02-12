@@ -27,7 +27,7 @@ public class Parser {
 		else{
 			Statement();
 			if(nextToken.tCode == Token.TokenCode.SEMICOL){
-				//poppa öllu af og skrifa út?? forlúppa
+				Print();
 				nextToken = Lexer.nextToken();
 				Statements();
 			}
@@ -40,8 +40,10 @@ public class Parser {
 	private void Statement(){
 		
 		if(nextToken.tCode == Token.TokenCode.ID){
+			System.out.println("PUSH " + nextToken.lexeme);
 			nextToken = Lexer.nextToken();
 			if(nextToken.tCode == Token.TokenCode.ASSIGN){
+				stack.push("ASSIGN");
 				nextToken = Lexer.nextToken();
 				Expr();
 			}
@@ -50,8 +52,10 @@ public class Parser {
 			}
 		}
 		else if(nextToken.tCode == Token.TokenCode.PRINT){
+			stack.push("PRINT");
 			nextToken = Lexer.nextToken();
 			if(nextToken.tCode == Token.TokenCode.ID){
+				System.out.println("PUSH " + nextToken.lexeme);
 				nextToken = Lexer.nextToken();
 			}
 		}
@@ -91,11 +95,21 @@ public class Parser {
 			nextToken = Lexer.nextToken();
 		}
 		else if(nextToken.tCode == Token.TokenCode.ID){
+			System.out.println("PUSH " + nextToken.lexeme);
 			nextToken = Lexer.nextToken();
 		}
 		else  if(nextToken.tCode == Token.TokenCode.LPAREN){
+			stack.push("(");
+			nextToken = Lexer.nextToken();
 			Expr();
 			if(nextToken.tCode == Token.TokenCode.RPAREN){
+					
+				while(stack.peek() != "("){
+					String pop = stack.pop();
+					System.out.println(pop);	
+				}		
+				stack.pop();
+				
 				nextToken = Lexer.nextToken();
 			}
 			else{
@@ -105,9 +119,12 @@ public class Parser {
 		
 	}
 	
-	private void Print(Token.TokenCode token){
+	private void Print(){
 		
-		//þegar ég fæ semikommu að prenta út það sem er á staknum m.v. það sem kemur af staknum. 
+		while(!stack.empty()){
+			String pop = stack.pop();
+			System.out.println(pop);
+		}
 	}
 	
 	private void Error(){
