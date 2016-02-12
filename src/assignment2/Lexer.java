@@ -86,9 +86,9 @@ public class Lexer {
 			return token;
 		}
 		
-		else if(Character.isAlphabetic(lexeme.charAt(0))){
+		else if(Character.isLetter(lexeme.charAt(0))){
 		
-			while(Character.isAlphabetic(input[index + 1]) && index + 1 < input.length ){
+			while(Character.isLetter(input[index + 1]) && index + 1 < input.length ){
 				index++;
 				lexeme = lexeme + input[index];
 			}

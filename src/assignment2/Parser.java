@@ -22,20 +22,26 @@ public class Parser {
 	
 	private void Statements() {
 		System.out.println("Statements");
-		Statement();
-		nextToken = Lexer.nextToken();
-		if(nextToken.tCode == Token.TokenCode.SEMICOL){
-			nextToken = Lexer.nextToken();
-			Statements();
+		
+		if(nextToken.tCode.equals(Token.TokenCode.END)){
+			return; 
 		}
-		else if(nextToken.tCode.equals(Token.TokenCode.END)){
-			return;
-		}
+	
 		else{
-			System.out.println("This error: 1");
-			Error();
+			Statement();
+			if(nextToken.tCode == Token.TokenCode.SEMICOL){
+				nextToken = Lexer.nextToken();
+				Statements();
+			}
+			else{
+				System.out.println(nextToken.lexeme);
+				System.out.println("This error: 1");
+				Error();
+			}
 		}
+					
 	}
+
 	
 	private void Statement(){
 		
@@ -43,7 +49,6 @@ public class Parser {
 		if(nextToken.tCode == Token.TokenCode.ID){
 			nextToken = Lexer.nextToken();
 			if(nextToken.tCode == Token.TokenCode.ASSIGN){
-				
 				nextToken = Lexer.nextToken();
 				Expr();
 			}
@@ -53,7 +58,7 @@ public class Parser {
 		}
 		else if(nextToken.tCode == Token.TokenCode.PRINT){
 			nextToken = Lexer.nextToken();
-			if(nextToken.tCode == Token.TokenCode.ASSIGN){
+			if(nextToken.tCode == Token.TokenCode.ID){
 				nextToken = Lexer.nextToken();
 			}
 		}
@@ -65,7 +70,6 @@ public class Parser {
 	private void Expr(){
 		System.out.println("EXPR");
 		Term();
-		nextToken = Lexer.nextToken();
 		if(nextToken.tCode == Token.TokenCode.ADD){
 			nextToken = Lexer.nextToken();
 			Expr();
